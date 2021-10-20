@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Animation</title>
+</head>
+<body onload="animate()">
+    <div>
+        <h1 id="animation">Hello World<h1/>
+    </div>
+    <p>Reload page to restart animation</p>
+    <div>
+        <a href="" target="_blank">Source Code</a>
+    </div>
+    <script>
+        async function animate(){
+            var words = document.getElementById("animation");
+            var text = words.innerHTML;
+            words.innerHTML = "";
+            for (letter in Array.from(text)){
+                words.innerHTML += text[letter]+"|";
+                await sleep(50); // wait before every letter is added
+                words.innerHTML = words.innerHTML.slice(0, -1);
+            }
+            while (1){ // Just the extra animation at the end to simulate blinking
+                words.innerHTML += "|";
+                await sleep(500);
+                words.innerHTML = words.innerHTML.slice(0, -1);
+                await sleep(500);
+            }
+        }
+
+        function sleep(ms) { // sleep function
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+    </script>
+    <style>
+        code {
+            display: block;
+            white-space: pre-wrap   
+        }
+    </style>
+</body>
+</html>
